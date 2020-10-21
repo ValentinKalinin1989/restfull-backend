@@ -1,6 +1,7 @@
 package com.test.restfullbackend.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.test.restfullbackend.model.ResultEntity;
 import com.test.restfullbackend.model.User;
 import com.test.restfullbackend.model.Views;
 import com.test.restfullbackend.repository.UserRepository;
@@ -31,15 +32,23 @@ public class UserController {
     }
 
     @PostMapping
-    public User create(@RequestBody User user) {
-        return userRepository.save(user);
+    public ResultEntity create(@RequestBody User user) {
+        ResultEntity resultEntity = ResultEntity.resultTestUser(user);
+        if (resultEntity.isSuccess()) {
+            userRepository.save(user);
+        }
+        return resultEntity;
     }
 
     @PutMapping("{login}")
-    public User update(@PathVariable("login") User userFromDb,
+    public ResultEntity update(@PathVariable("login") User userFromDb,
                        @RequestBody User user) {
-        BeanUtils.copyProperties(user, userFromDb, "login");
-        return userRepository.save(user);
+        ResultEntity resultEntity = ResultEntity.resultTestUser(user);
+        if (resultEntity.isSuccess()) {
+            BeanUtils.copyProperties(user, userFromDb, "login");
+            return resultEntity;
+        }
+        return resultEntity;
     }
 
     @DeleteMapping("{login}")

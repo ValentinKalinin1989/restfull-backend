@@ -1,7 +1,7 @@
 package com.test.restfullbackend.model;
 
 /**
- * класс маркер для JsonView
+ * Marker class for JsonView
  */
 
 public final class Views {
