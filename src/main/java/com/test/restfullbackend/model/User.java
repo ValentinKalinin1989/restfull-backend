@@ -1,5 +1,6 @@
 package com.test.restfullbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
@@ -27,6 +28,7 @@ public class User {
     private String password;
 
     @ManyToMany
+    @JsonManagedReference
     @JoinTable(name = "usr_role",
             joinColumns = @JoinColumn(name = "usr_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))

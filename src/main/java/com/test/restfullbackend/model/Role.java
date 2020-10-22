@@ -1,5 +1,7 @@
 package com.test.restfullbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
@@ -20,6 +22,7 @@ public class Role {
     private String name;
 
     @ManyToMany
+    @JsonBackReference
     @JoinTable(name = "usr_role",
             joinColumns = @JoinColumn(name = "role_id"),
             inverseJoinColumns = @JoinColumn(name = "usr_id"))
