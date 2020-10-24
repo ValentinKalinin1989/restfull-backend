@@ -1,3 +1,3 @@
-delete from usr_role;
-delete from role;
-delete from usr;
+DELETE FROM usr_role;
+DELETE FROM role;
+DELETE FROM usr;
