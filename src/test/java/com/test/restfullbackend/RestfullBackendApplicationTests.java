@@ -18,6 +18,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
+/**
+ * test all CRUD operation for REST API
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -31,6 +34,11 @@ class RestfullBackendApplicationTests {
     @Autowired
     private UserController userController;
 
+    /**
+     * get all user
+     *
+     * @throws Exception
+     */
     @Test
     public void whenGetAllUsers() throws Exception {
         this.mockMvc.perform(get("/users"))
@@ -41,6 +49,11 @@ class RestfullBackendApplicationTests {
                         "{\"name\":\"name3\",\"login\":\"login3\",\"password\":\"pass3\"}")));
     }
 
+    /**
+     * get user with login3
+     *
+     * @throws Exception
+     */
     @Test
     public void whenGetUserWithLogin3() throws Exception {
         this.mockMvc.perform(get("/users/login3"))
@@ -51,6 +64,12 @@ class RestfullBackendApplicationTests {
                         "\"roles\":[{\"id\":3,\"name\":\"analyst\"},{\"id\":4,\"name\":\"operator\"}]}")));
     }
 
+    /**
+     * delete user with login3
+     * and try get user after deleting
+     *
+     * @throws Exception
+     */
     @Test
     public void whenDelUserWithLogin3() throws Exception {
         this.mockMvc.perform(delete("/users/login3"))
@@ -60,6 +79,11 @@ class RestfullBackendApplicationTests {
                 .andExpect(status().isNoContent());
     }
 
+    /**
+     * create user with valid params
+     *
+     * @throws Exception
+     */
     @Test
     public void whenCreateUserWithLogin4WithTrueParam() throws Exception {
         this.mockMvc.perform(post("/users")
@@ -71,6 +95,12 @@ class RestfullBackendApplicationTests {
                 .andExpect(status().isCreated());
     }
 
+    /**
+     * create user with invalid params
+     * and get description errors
+     *
+     * @throws Exception
+     */
     @Test
     public void whenCreateUserWithLogin4WithErrorParam() throws Exception {
         this.mockMvc.perform(post("/users")
@@ -85,6 +115,12 @@ class RestfullBackendApplicationTests {
                         "\"login - is EMPTY\",\"password - must have one uppercase letter and number\"]}")));
     }
 
+    /**
+     * update user(login1) with valid params
+     * and get user with changed params
+     *
+     * @throws Exception
+     */
     @Test
     public void whenTryUpdateUserWithLogin1WithTrueParam() throws Exception {
         this.mockMvc.perform(put("/users/login1")
@@ -102,6 +138,13 @@ class RestfullBackendApplicationTests {
                         "\"password\":\"updated_pass1\",\"roles\":[{\"id\":3,\"name\":\"analyst\"}]}")));
     }
 
+    /**
+     * update user(login2) with invalid params
+     * and get description errors
+     * and checking that user parameters have not been changed
+     *
+     * @throws Exception
+     */
     @Test
     public void whenTryUpdateUserWithLogin2WithErrorParam() throws Exception {
         this.mockMvc.perform(put("/users/login2")

@@ -1,6 +1,5 @@
 package com.test.restfullbackend.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
@@ -8,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * model for user
+ */
 @Entity
 @Table(name = "usr")
 public class User {

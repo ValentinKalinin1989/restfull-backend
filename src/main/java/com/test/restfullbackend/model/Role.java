@@ -1,13 +1,14 @@
 package com.test.restfullbackend.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * model for role
+ */
 @Entity
 @Table(name = "role")
 public class Role {
@@ -15,12 +16,14 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id",
             nullable = false)
-
     private Integer id;
     @Column(name = "name",
             length = 20,
             nullable = false)
 
+    /**
+     * role - name
+     */
     private String name;
 
     @ManyToMany
