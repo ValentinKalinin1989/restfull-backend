@@ -17,30 +17,14 @@ public class Role {
     @Column(name = "id",
             nullable = false)
     private Integer id;
-    @Column(name = "name",
-            length = 20,
-            nullable = false)
 
     /**
      * role - name
      */
+    @Column(name = "name",
+            length = 20,
+            nullable = false)
     private String name;
-
-    @ManyToMany
-    @JsonIgnore
-    @JoinTable(name = "usr_role",
-            joinColumns = @JoinColumn(name = "role_id"),
-            inverseJoinColumns = @JoinColumn(name = "usr_id"))
-    private List<User> users;
-
-
-    public Role() {
-    }
-
-    public Role(Integer id, String name) {
-        this.id = id;
-        this.name = name;
-    }
 
     public Integer getId() {
         return id;
@@ -56,18 +40,6 @@ public class Role {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
-
-    public void addUser(User user) {
-        users.add(user);
     }
 
     @Override
